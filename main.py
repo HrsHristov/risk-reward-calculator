@@ -4,17 +4,35 @@ from trading_calculator import detect_higher_high, calculate_risk_reward
 
 def main():
     
-    # Set up logging
+    # Set up logger
     logger = utils.setup_logger("main")
     logger.info("Starting Risk To Reward Calculator")
+    
+    # Get the user input and split it by spaces.
+    # The first element of the input is always the trading pair (e.g., "ETHUSDT").
+    pair, *values = input("Your Input: ").split()
+    
     #Fetch historical data from Binance
-    data = get_historical_data()
+    data = get_historical_data(pair)
     # print(data)
-    print(f"higher high: {detect_higher_high(data)}")
-    hh = detect_higher_high(data)
+    
+    # Detect the last higher high using our trading calculator module
+    higher_high = detect_higher_high(data)
+    if higher_high:
+        logger.info(f"Detected higher high: {higher_high}")
+    else:
+        logger.info("No higher high detected in recent data")
+        return #End the exection if there is no higher high
+    
+    if len(values) == 3:
+        # If all details are provided, unpack the remaining values.
+        entry_price, tp_percent, expected_drop_percent = map(float, values)
+        # Calculate the risk-to-reward ratio using the provided entry price and the detected higher high.
+        result = calculate_risk_reward(entry_price, higher_high, tp_percent, expected_drop_percent)
 
-    result = calculate_risk_reward(105000, hh, 20, 30)
-    for key, value in result.items():
-        print(f"{key}: {value:.2f}")
-        
-main()
+        logger.info("Trade Setup:")
+        for key, value in result.items():
+            print(f"{key}: {value:.2f}")
+    
+if __name__ == "__main__":      
+    main()
