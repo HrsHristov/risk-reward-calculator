@@ -1,6 +1,6 @@
 # Risk-Reward Calculator CLI Application
 
-Simple app to calculate RR Ratio based on the last higher high
+This CLI tool calculates the risk-to-reward ratio based on historical price data from Binance and your input parameters. Depending on the details provided, the tool returns different outputs.
 
 ## Installation
 
@@ -13,30 +13,49 @@ pip install -r requirements.txt
 ## Usage
 
 -   Fetches historical data from Binance.
--   Detects the last higher high in the data.
--   Calculates a risk-to-reward ratio based on an entry price, a take profit percentage, and an expected drop percentage.
+-   It identifies the last higher high and the subsequent lowest price.
+-   Based on your input, it calculates the take profit target, expected bottom, risk, reward, and the risk-to-reward ratio.
 
 ## Instructions
 
-1. **Ensure you have entered the proper trading pair, interval, and limit.**
+Provide your input as a single line with details separated by spaces. The tool accepts three types of inputs:
 
-2. **Pair with No Other Data:**  
-   If you provide a pair with no other data, the app will provide only the most recent higher high.
+### Only Trading Pair Provided
 
-3. **Take Profit Calculation:**  
-   The app calculates a take profit target at a given percentage above the entry, and an expected bottom based on the detected higher high.
+-   **Input:** `<Trading Pair>`
+-   **Returns:**
+    -   The last higher high
+    -   The most recent lower low (price after the last higher high)
 
-4. **Input Format:**  
-   Provide the following details in a single line, separated by spaces:
-    - **Trading Pair** (e.g., BTCUSDT, ETHUSDC)
-    - **Entry Price** (e.g., 2543.25, 7.26, 0.54)
-    - **Take Profit (TP) Percentage** (e.g., 25 for 25%)
-    - **Expected Further Drop** (if you entered 30% down and expect another 10%, enter 40)
+### Trading Pair, Entry Price, and Take Profit (TP) Percentage Provided
+
+-   **Input:** `<Trading Pair> <Entry Price> <TP Percentage>`
+-   **Returns:**
+    -   The take profit target price (calculated from the entry price and TP percentage)
+    -   The expected bottom (based on the detected higher high)
+    -   The risk, determined using the actual drop (i.e., the last lower low)
+    -   The reward
+    -   The risk-to-reward (R/R) ratio
+
+### Trading Pair, Entry Price, TP Percentage, and Anticipated Drop Percentage Provided
+
+-   **Input:** `<Trading Pair> <Entry Price> <TP Percentage> <Anticipated Drop Percentage>`
+-   **Returns:**
+    -   The take profit target price
+    -   The expected bottom
+    -   The risk, calculated based on the anticipated drop provided by the user
+    -   The reward
+    -   The risk-to-reward (R/R) ratio
 
 **Example Input:**
 ETHUSDT 2543.25 25 40
 
-_This means you entered ETHUSDT at $2543.25, set a TP at 25%, and expected it to drop 40% in total from the last higher high._
+This means you entered:
+
+-   **Trading pair:** ETHUSDT
+-   **Entry price:** $2543.25
+-   **Take profit:** 25%
+-   **Anticipated total drop:** 40% from the last higher high
 
 ## Disclaimer
 
