@@ -20,14 +20,14 @@ def print_welcome_message():
         4.4. Expected further drop(if you entered 30% down and expect another 10%, enter 40)
         
         Example input: ETHUSDT 2543.25 25 40
-        Meaing you entered ETHUSDT at $2543.25, set a TP at 25%, and expected it drop 40% in total from the last higher high
+        Meaning you entered ETHUSDT at $2543.25, set a TP at 25%, and expected it drop 40% in total from the last higher high
         
     Let's begin!
     *************************************************
     """
-    
+
     print(welcome_text)
-    
+
 
 def print_disclaimer():
     disclaimer = """
@@ -41,5 +41,5 @@ def print_disclaimer():
     Before trading with actual money, first make sure your risk management is professional-level.
     *************************************************
     """
-    
+
     print(disclaimer)
