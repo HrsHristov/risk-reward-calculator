@@ -38,7 +38,7 @@ def print_disclaimer():
     Before making any financial decisions, please consult a licensed financial advisor to ensure that your strategies align with your personal circumstances. 
     
     You retain full responsibility for your trading at all times.
-    Before trading with actual money, first make sure your risk management is professional-level."
+    Before trading with actual money, first make sure your risk management is professional-level.
     *************************************************
     """
     
