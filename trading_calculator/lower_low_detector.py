@@ -1,27 +1,19 @@
-def detect_lower_low(df, lookback=20):
+def detect_lower_low(df, hh_index):
     """
-    Detect the last lower low in the given historical data.
+    Detect the lowest low between the given higher high index and the current price.
     
     Parameters:
-        df (pandas.DataFrame): DataFrame containing a 'low' column.
-    
+        data (pandas.DataFrame): DataFrame containing a 'high' column.
+        hh_index (int): The index of the last higher high.
+        
     Returns:
-        float: The last lower low found, or None if not found.
+        float: The lowest low between the higher high and the current price.
     """
-    
-    # Extract the "low" prices as a numpy array.
-    lows = df["low"].values
-    ll_index = None
-    
-    # Loop through the data, starting from "lookback" and ending before the last "lookback" elements.
-    for i in range(lookback, len(lows) - lookback):
-        # Check if the current low is lower than all lows in the previous "lookback" period
-        # and also lower than all lows in the next "lookback" period.
-        if lows[i] < min(lows[i-lookback:i]) and lows[i] < min(lows[i+1:i+lookback+1]):
-            ll_index = i  # Update the index if a lower low is found
+    if hh_index is None:
+        return None
 
-    # If a lower low was detected, return its value.
-    if ll_index is not None:
-        return df.iloc[ll_index]["low"]
-    # Otherwise, return None.
-    return None
+    # Slice the DataFrame from the higher high to the end (current price)
+    subset = df.iloc[hh_index:]["low"]
+    # Find the minimum low in that range
+    lowest_low = subset.min()
+    return lowest_low
