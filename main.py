@@ -1,5 +1,5 @@
 from binance_client import get_historical_data
-from trading_calculator import detect_higher_high, calculate_risk_reward
+from trading_calculator import detect_higher_high, detect_lower_low, calculate_risk_reward
 from utils import setup_logger, print_welcome_message, print_disclaimer
 
 def main():
@@ -28,7 +28,13 @@ def main():
         logger.info(f"Detected higher high: {higher_high}")
     else:
         logger.info("No higher high detected in recent data")
-        return #End the exection if there is no higher high
+    
+    # Detect the last lower low using our trading calculator module
+    lower_low = detect_lower_low(data)
+    if lower_low:
+        logger.info(f"Detected lower low: {lower_low}")
+    else:
+        logger.info("No lower low detected in recent data")
     
     if len(values) == 3:
         # If all details are provided, unpack the remaining values.
