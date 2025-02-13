@@ -1,4 +1,4 @@
-def detect_higher_high(df, lookback = 20):
+def detect_higher_high(df, lookback=20):
     """
     Detect the last higher high in the given historical data.
     
@@ -22,6 +22,6 @@ def detect_higher_high(df, lookback = 20):
 
     # If a higher high was detected, return its value.
     if hh_index:
-        return df.iloc[hh_index]["high"]
+        return df.iloc[hh_index]["high"], hh_index
     # Otherwise, return None.
     return None
