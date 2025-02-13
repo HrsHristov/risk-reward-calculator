@@ -1,11 +1,17 @@
 from binance_client import get_historical_data
-import utils
 from trading_calculator import detect_higher_high, calculate_risk_reward
+from utils import setup_logger, print_welcome_message, print_disclaimer
 
 def main():
     
     # Set up logger
-    logger = utils.setup_logger("main")
+    logger = setup_logger("main")
+    
+    # Print welcome message and instructions
+    print_welcome_message()
+    #Print Disclaimer
+    print_disclaimer()
+    
     logger.info("Starting Risk To Reward Calculator")
     
     # Get the user input and split it by spaces.
